@@ -21,11 +21,7 @@ class ThreeDCartAPI {
     $client = new GuzzleHttp\Client();
     $res = $client->get('https://apirest.3dcart.com/3dCartWebAPI/v1/', ['header' => headershere]);
     return $res->getStatusCode();
-    // "200"
-    // echo $res->getHeader('content-type');
-    // 'application/json; charset=utf8'
-    // echo $res->getBody();
-    // {"type":"User"...'
+    
   }
 
 }
