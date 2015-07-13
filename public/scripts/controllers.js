@@ -5,8 +5,17 @@
         .controller('HomeController', ['$rootScope', '$scope', '$location', '$localStorage', 'Auth',
             function ($rootScope, $scope, $location, $localStorage, Auth) {
                 function successAuth(res) {
-                    $localStorage.token = res.token;
-                    window.location = "/";
+                    if (res.token) {
+                        console.log(res.token);
+                        $localStorage.token = res.token;
+                        if ( $localStorage.token ) {
+                            window.location = "/";
+                        }
+                    }
+                    else {
+                        $rootScope.error = "Something went wrong! please try again."
+                    }
+
                 }
 
                 $scope.signin = function () {
@@ -47,6 +56,15 @@
                 $rootScope.error = 'Failed to fetch restricted content.';
             });
             Data.getApiData(function (res) {
+                $scope.api = res.data;
+            }, function () {
+                $rootScope.error = 'Failed to fetch restricted API content.';
+            });
+        }])
+    
+        .controller('OrdersController', ['$rootScope', '$scope', 'Data', function ($rootScope, $scope, Data) {
+            Data.getOrdersApiData(function (res) {
+                console.log(res);
                 $scope.api = res.data;
             }, function () {
                 $rootScope.error = 'Failed to fetch restricted API content.';

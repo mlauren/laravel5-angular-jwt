@@ -60,6 +60,9 @@
                 },
                 getApiData: function (success, error) {
                     $http.get(urls.BASE_API + '/restricted').success(success).error(error)
+                },
+                getOrdersApiData: function (success, error) {
+                    $http.get(urls.BASE_API + '/orders').success(success).error(error)
                 }
             };
         }

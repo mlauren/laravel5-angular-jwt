@@ -7,8 +7,8 @@
         'angular-loading-bar'
     ])
         .constant('urls', {
-            BASE: 'http://jwt.dev:8000',
-            BASE_API: 'http://api.jwt.dev:8000/v1'
+            BASE: 'http://jwt.dev',
+            BASE_API: 'http://api.jwt.dev/v1'
         })
         .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
             $routeProvider.
@@ -27,6 +27,10 @@
                 when('/restricted', {
                     templateUrl: 'partials/restricted.html',
                     controller: 'RestrictedController'
+                }).
+                when('/orders', {
+                    templateUrl: 'partials/orders.html',
+                    controller: 'OrdersController'
                 }).
                 otherwise({
                     redirectTo: '/'
@@ -53,6 +57,7 @@
         }
         ]).run(function($rootScope, $location, $localStorage) {
             $rootScope.$on( "$routeChangeStart", function(event, next) {
+                console.log(next);
                 if ($localStorage.token == null) {
                     if ( next.templateUrl === "partials/restricted.html") {
                         $location.path("/signin");
